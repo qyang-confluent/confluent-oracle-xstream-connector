@@ -63,8 +63,8 @@ SELECT
   ROUND(SUM(DECODE(TO_CHAR(COMPLETION_TIME, 'HH24'), '23', ((BLOCKS * BLOCK_SIZE) / 1024 / 1024), 0))) "H23",
   ROUND(SUM(BLOCKS * BLOCK_SIZE) / 1024 / 1024) "Total Size (MB)"
 FROM V$ARCHIVED_LOG
-WHERE COMPLETION_TIME BETWEEN TO_DATE('01/10/2024', 'DD/MM/YYYY')
-                          AND TO_DATE('06/11/2024', 'DD/MM/YYYY')
+WHERE COMPLETION_TIME BETWEEN TO_DATE('01/10/2026', 'DD/MM/YYYY')
+                          AND TO_DATE('06/11/2026', 'DD/MM/YYYY')
 GROUP BY TRUNC(COMPLETION_TIME), THREAD#, TO_CHAR(COMPLETION_TIME, 'Day')
 ORDER BY 1;
 ```
@@ -153,6 +153,28 @@ show parameter pga_aggregate_target
 PROMPT ==== displays Automatic Memory Management (AMM) Setup Part 2====
 show parameter MEMORY_TARGET
 show parameter MEMORY_MAX_TARGET
+```
+
+
+## 6) PDB Redo Genenration Rate (run in CDB)
+If you have the Oracle Diagnostics Pack licensed, you can query historical snapshots across hours or days. The AWR_PDB_SYSSTAT view captures these deltas per pluggable container.Run this from the CDB root to track hourly or snapshot-based intervals:
+
+```sql
+SELECT 
+    p.name AS pdb_name,
+    h.snap_id,
+    to_char(h.begin_interval_time, 'DD-MON-YYYY HH24:MI') AS snap_time,
+    ROUND((s.value - LAG(s.value, 1, s.value) OVER (PARTITION BY s.con_id ORDER BY h.snap_id)) / 1024 / 1024, 2) AS redo_diff_mb
+FROM 
+    dba_hist_snapshot h
+JOIN 
+    awr_pdb_sysstat s ON h.snap_id = s.snap_id AND h.dbid = s.dbid
+JOIN 
+    v$pdbs p ON s.con_id = p.con_id
+WHERE 
+    s.stat_name = 'redo size'
+ORDER BY 
+    h.snap_id DESC, redo_diff_mb DESC;
 ```
 
 
