@@ -280,10 +280,3 @@ In addition to the query output, please provide the following information:
 - Expected throughput and latency requirements
 - Whether there are long-running transactions
 
-## Full script reference
-
-If preferred, your DBA team can also review the full script that contains these queries and additional context:
-
-[XStream Info Gathering Script](https://github.com/ora0600/atg-cdc-boost-service/blob/main/pre-flight/Confluent_CDCXStream_info_gathering.sql)
-
-Please send the query outputs and answers back to the Confluent account team for sizing review.
