@@ -5,7 +5,7 @@ To size the Confluent Oracle XStream CDC Connector correctly, we need a few Orac
 ## Notes before you run the queries
 
 - Please run these queries for each database or PDB that will be captured by the connector.  
-- For the archive log throughput queries and run in CDB, please update the date range in the `WHERE` clause to reflect a recent representative period. Peak hourly redo generation is one of the most important sizing inputs.  
+- For the archive log throughput queries, please update the date range in the `WHERE` clause to reflect a recent representative period. Peak hourly redo generation is one of the most important sizing inputs.  
 - If you use the table growth query, note that `DBA_HIST_SEG_STAT` is part of an Oracle Management Pack and requires the appropriate Oracle license.  
 
 ## 1) Redo log structure
