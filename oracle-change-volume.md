@@ -1,4 +1,4 @@
-# Oracle XStream CDC Connector Sizing Information Request
+# SQL Queries to collect Oracle XStream CDC Connector Sizing Information 
 
 To size the Confluent Oracle XStream CDC Connector correctly, we need a few Oracle-side metrics from your DBA team. Please run the queries below on each Oracle database or PDB that will be integrated with CDC and share the results back with the Confluent team.
 
@@ -9,7 +9,7 @@ To size the Confluent Oracle XStream CDC Connector correctly, we need a few Orac
 - If you use the table growth query, note that `DBA_HIST_SEG_STAT` is part of an Oracle Management Pack and requires the appropriate Oracle license.  
 - For the LOB queries, replace `YOUR_SCHEMA` with the Oracle schema that owns the tables you plan to capture.
 
-## 1\) Redo log structure
+## 1) Redo log structure
 
 This helps us understand the redo log group layout, member count, and file sizing.
 
@@ -25,7 +25,7 @@ FROM v$log a,
 WHERE a.group# = b.group#;
 ```
 
-## 2\) Archive log generation by hour
+## 2) Archive log generation by hour
 
 This query is used to estimate throughput. Please update the date range before running it. We use the peak hourly value to determine the connector throughput requirement.
 
@@ -71,7 +71,7 @@ GROUP BY TRUNC(COMPLETION_TIME), THREAD#, TO_CHAR(COMPLETION_TIME, 'Day')
 ORDER BY 1;
 ```
 
-## 3\) Table growth and table size
+## 3) Table growth and table size
 
 This helps identify which tables are changing the most and how large the captured tables are overall.
 
@@ -107,7 +107,7 @@ WHERE s.OBJ# = o.OBJECT_ID
 ORDER BY 6 DESC;
 ```
 
-## 4\) Log switch frequency
+## 4) Log switch frequency
 
 This helps us understand how often redo logs switch and whether redo log sizing may need attention.
 
@@ -140,9 +140,8 @@ GROUP BY
 ORDER BY Hour ASC;
 ```
 
-## 
 
-## 5\) SGA and memory settings
+## 5) SGA and memory settings
 
 Please run the following commands to capture the SGA and memory configuration for the Oracle instance.
 
@@ -158,7 +157,6 @@ show parameter MEMORY_TARGET
 show parameter MEMORY_MAX_TARGET
 ```
 
-## 
 
 ## Please also share these non-query answers if the connector is going to run against a new Oracle Database
 
