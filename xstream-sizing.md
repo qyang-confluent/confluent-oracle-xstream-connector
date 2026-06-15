@@ -1,4 +1,4 @@
-# Oracle XStream CDC Connector Sizing Information Request
+# Oracle XStream CDC Connector Sizing Information 
 
 To size the Confluent Oracle XStream CDC Connector correctly, we need a few Oracle-side metrics from your DBA team. Please run the queries below on each Oracle database or PDB that will be integrated with CDC and share the results back with the Confluent team.
 
