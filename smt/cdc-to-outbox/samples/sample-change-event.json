@@ -1,0 +1,28 @@
+{
+  "comment": "Logical view of a value record on topic cflt.SAMPLE.EMPLOYEES, as emitted by the Oracle XStream CDC Source connector for an UPDATE. With the Avro converter the wire format is binary; this is the decoded structure the SMT sees.",
+  "before": {
+    "EMPLOYEE_ID": 101,
+    "FIRST_NAME": "Ada",
+    "LAST_NAME": "Lovelace",
+    "EMAIL": "ada@example.com",
+    "SALARY": 9000
+  },
+  "after": {
+    "EMPLOYEE_ID": 101,
+    "FIRST_NAME": "Ada",
+    "LAST_NAME": "Lovelace",
+    "EMAIL": "ada@example.com",
+    "SALARY": 9500
+  },
+  "source": {
+    "version": "...",
+    "connector": "oracle",
+    "name": "cflt",
+    "ts_ms": 1718000000000,
+    "schema": "SAMPLE",
+    "table": "EMPLOYEES",
+    "scn": "1234567"
+  },
+  "op": "u",
+  "ts_ms": 1718000000123
+}

@@ -1,0 +1,8 @@
+{
+  "comment": "The value record after the CdcToOutbox SMT runs on the change event in sample-change-event.json. The outbox message has a null key (the original EMPLOYEES primary key is folded into 'id'). 'payload' is a schemaless JSON string (compact on the wire). Here the record key was the PK struct {EMPLOYEE_ID:101}, so id = 101.EMPLOYEES.",
+  "id": "101.EMPLOYEES",
+  "aggregatetype": "EMPLOYEES",
+  "type": "u",
+  "payload": "{\"EMPLOYEE_ID\":101,\"FIRST_NAME\":\"Ada\",\"LAST_NAME\":\"Lovelace\",\"EMAIL\":\"ada@example.com\",\"SALARY\":9500}",
+  "timestamp": 1718000000123
+}
