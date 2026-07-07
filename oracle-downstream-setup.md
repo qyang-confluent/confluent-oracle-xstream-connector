@@ -312,13 +312,20 @@ Point the connector at the **downstream** database:
 ```json
 {
   "connector.class": "io.confluent.connect.oracle.xstream.OracleXStreamSourceConnector",
-  "db.name":         "strmdb1",
-  "db.hostname":     "<downstream_host>",
-  "db.port":         "1521",
-  "db.user":         "cfltuser",
-  "db.password":     "<password>",
-  "xstream.outbound.server.name": "XOUT_DS",
-  "table.inclusion.regex": "HR[.](.*)"
+   "database.hostname": "qyang-dell",
+   "database.port": "1521",
+   "database.user": "CFLTUSER",
+   "database.password": "xxxxx",
+   "database.dbname": "DB1",
+   "database.service.name": "db1.myoracle.org",
+
+   "downstream.database.hostname": "qyang-dell",
+   "downstream.database.dbname": "STRMDB1",
+   "downstream.database.port": "1522",
+   "downstream.database.service.name": "strmdb1.myoracle.org",
+
+   "database.out.server.name": "XOUT_DS",
+   
 }
 ```
 
