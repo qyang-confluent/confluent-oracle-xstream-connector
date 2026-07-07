@@ -1,0 +1,85 @@
+{
+    "name": "rac-xstream-cc-xxx",
+    "connector.class": "io.confluent.connect.oracle.xstream.cdc.OracleXStreamSourceConnector",
+    "tasks.max": "1",
+
+    "database.hostname": "qyang-dell",
+    "_database.hostname": "192.168.1.88",
+    "database.port": "1521",
+    "database.user": "CFLTUSER",
+    "database.password": "Demo1234",
+    "database.dbname": "DB1",
+    "database.service.name": "db1.myoracle.org",
+
+
+    "downstream.database.hostname": "qyang-dell",
+    "downstream.database.dbname": "STRMDB1",
+    "downstream.database.port": "1522",
+    "downstream.database.service.name": "strmdb1.myoracle.org",
+
+    "database.out.server.name": "XOUT_DS",
+
+    "topic.prefix": "dsoracle",
+
+
+    "table.include.list": "HR.EMP,HR.EMPLOYEES",
+
+
+    "_column.exclude.list": "HR.EMP.COL2",
+
+    "key.converter.schemas.enable": "false",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+
+    "value.converter.schemas.enable": "false",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+
+    "schema.history.internal.kafka.topic": "rac-orcl-schema-changes.cflt",
+    "schema.history.internal.kafka.bootstrap.servers" : "xxxxxxx.us-east-1.aws.confluent.cloud:9092",
+    "schema.history.internal.producer.request.timeout.ms": 20000,
+    "schema.history.internal.producer.retry.backoff.ms" : 500,
+    "schema.history.internal.producer.security.protocol": "SSL",
+    "schema.history.internal.producer.ssl.keystore.location": "client-keystore.jks",
+    "schema.history.internal.producer.ssl.keystore.password": "testme",
+    "schema.history.internal.producer.ssl.key.password": "testme",
+    "schema.history.internal.producer.ssl.keystore.type": "JKS",
+    "schema.history.internal.consumer.security.protocol": "SSL",
+    "schema.history.internal.consumer.ssl.keystore.location": "client-keystore.jks",
+    "schema.history.internal.consumer.ssl.keystore.password": "testme",
+    "schema.history.internal.consumer.ssl.key.password": "testme",
+    "schema.history.internal.consumer.ssl.keystore.type": "JKS",
+    "schema.history.internal.consumer.request.timeout.ms": 20000,
+    "schema.history.internal.consumer.retry.backoff.ms" : 500,
+
+    "schema.history.internal.skip.unparseable.ddl": "true",
+    "schema.history.internal.store.only.captured.tables.ddl": "true",
+
+    "_snapshot.mode" : "no_data",
+
+    "snapshot.mode" : "initial",
+
+    "topic.creation.default.partitions"        : 1,
+    "topic.creation.default.replication.factor": 3,
+    "decimal.handling.mode" : "string",
+    "_decimal.handling.mode" : "double",
+
+
+    "_heartbeat.interval.ms" : 60000,
+
+     "_transforms": "outbox",
+     "_transforms.outbox.type": "io.confluent.connect.smt.CdcToOutbox",
+     "_transforms.outbox.outbox.topic": "orcl_hr_outbox",
+     "_transforms.outbox.timestamp.field": "ts_ms",
+
+    "_transforms": "replace1",
+    "_transforms.replace1.type": "org.apache.kafka.connect.transforms.RegexRouter",
+    "_transforms.replace1.regex": "orcl\\.HR\\.(.*)",
+    "_transforms.replace1.replacement": "outbox1_orcl_hr",
+
+
+
+     "_signal.enabled.channels": "source",
+     "_signal.data.collection": "ORCL.CFLTUSER.CFLT_SIGNALS",
+
+   "snapshot.max.threads" : 5
+
+}
