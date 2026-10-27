@@ -1,0 +1,12 @@
+environment_name   = "Qi"
+table_include_list = "HR.EMPLOYEES"
+
+oracle = {
+  hostname        = "oracle-host"
+  user            = "CFLTUSER"
+  password        = "change-me"
+  dbname          = "ORCL"
+  service_name    = "ORCL.example.com"
+  out_server_name = "XOUT"
+  # downstream = { hostname = "ds-host", port = 1522, dbname = "STRMDB1", service_name = "strmdb1.example.com" }
+}
