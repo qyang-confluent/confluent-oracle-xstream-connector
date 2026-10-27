@@ -1,0 +1,7 @@
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfvars
+env.sh
+cp-standalone/generated/
+terraform/generated/
