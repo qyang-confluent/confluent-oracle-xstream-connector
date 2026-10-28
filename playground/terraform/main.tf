@@ -208,6 +208,7 @@ locals {
       "downstream.database.dbname"       = var.oracle.downstream.dbname
       "downstream.database.service.name" = var.oracle.downstream.service_name
     },
+    var.extra_connector_config,
   )
 }
 

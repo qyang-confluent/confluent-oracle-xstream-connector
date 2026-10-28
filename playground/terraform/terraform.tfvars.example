@@ -10,3 +10,9 @@ oracle = {
   out_server_name = "XOUT"
   # downstream = { hostname = "ds-host", port = 1522, dbname = "STRMDB1", service_name = "strmdb1.example.com" }
 }
+
+# Extra connector settings, merged last (they override generated keys). Values must be strings.
+# extra_connector_config = {
+#   "signal.enabled.channels" = "source"
+#   "signal.data.collection"  = "ORCL.CFLTUSER.CFLT_SIGNALS"
+# }

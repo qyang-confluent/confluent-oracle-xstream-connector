@@ -72,6 +72,7 @@ Other variables in `variables.tf` that you may want to change:
 | `connector_name` | `rac-xstream-cc-xxx` | Connector name |
 | `topic_prefix` | `ORCL` | Prefix for data topics (`<prefix>.<SCHEMA>.<TABLE>`) |
 | `snapshot_mode` | `no_data` | Snapshot behavior (`initial` loads existing rows) |
+| `extra_connector_config` | `{}` | Map of extra connector settings merged last into the generated config. Overrides generated keys. Example: `{ "signal.enabled.channels" = "source", "signal.data.collection" = "ORCL.CFLTUSER.CFLT_SIGNALS" }` |
 | `schema_history_topic` | `rac-orcl-schema-changes.cflt` | Schema history topic |
 | `confluent_license` | empty | Empty means the 30-day trial |
 

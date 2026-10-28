@@ -104,3 +104,9 @@ variable "output_dir" {
   type        = string
   default     = "generated"
 }
+
+variable "extra_connector_config" {
+  description = "Extra connector settings merged last into the generated connector config. Overrides any generated key with the same name (for example snapshot.mode)."
+  type        = map(string)
+  default     = {}
+}
