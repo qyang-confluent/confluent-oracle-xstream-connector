@@ -1,0 +1,2 @@
+oracle_pwd   = "CHANGE_ME"
+oracle_image = "yangqi2004/oracledb19ee:latest"
